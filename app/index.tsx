@@ -1,21 +1,41 @@
-import {Text, View, Image, ImageBackground} from 'react-native';
+import {StyleSheet, Text, View, TextInput} from "react-native";
+import React, {useState} from 'react';
 
-const logoImage = require("./images/favicon.png")
+export default function Index() {
 
-export default function App() {
-  return <View style={{flex: 1,backgroundColor:'plum', padding: 60}}>
-   <Text>
-    <Text style={{color: 'white'}}>Hello</Text> World!
-    </Text>
-    {/*
-    <Image source={logoImage} style={{width: 300, height: 300}}></Image>
-    <Image 
-    source={{uri: 'https://picsum.photos/200/300'}} 
-    style={{width: 300, height: 300}}
-
-    /> */}
-    <ImageBackground source={logoImage}>
-      <Text>IMAGE TEXT</Text>
-    </ImageBackground>
-  </View>
+  const [name, setName] = useState('Min');
+  const [age, setAge] = useState('0');
+  
+ 
+  
+  return (
+    <View style={styles.container}>
+      <Text>Enter name:</Text>
+      <TextInput multiline 
+      style={styles.input} placeholder='Enter your name' onChangeText={(val) => setName(val)}/>
+    
+       <Text>Enter age:</Text>
+       <TextInput style={styles.input} keyboardType="numeric" placeholder='Enter your age' onChangeText={(val) => setAge(val)}></TextInput>
+      <Text>name: {name}, age: {age}</Text>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer:{
+    marginTop: 20
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
+  }
+});
