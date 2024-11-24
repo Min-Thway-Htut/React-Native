@@ -1,22 +1,29 @@
-import {StyleSheet, Text, View, TextInput} from "react-native";
+import {StyleSheet, Text, View, ScrollView} from "react-native";
 import React, {useState} from 'react';
 
-export default function Index() {
+export default function Index() { 
 
-  const [name, setName] = useState('Min');
-  const [age, setAge] = useState('0');
-  
- 
-  
+  const [people, setPeople] = useState([
+    {name: 'Person1', key: '1'},
+    {name: 'Person2', key: '2'},
+    {name: 'Person3', key: '3'},
+    {name: 'Person4', key: '4'},
+    {name: 'Person5', key: '5'},
+    {name: 'Person6', key: '6'},
+    {name: 'Person7', key: '7'},
+  ])
+
   return (
     <View style={styles.container}>
-      <Text>Enter name:</Text>
-      <TextInput multiline 
-      style={styles.input} placeholder='Enter your name' onChangeText={(val) => setName(val)}/>
-    
-       <Text>Enter age:</Text>
-       <TextInput style={styles.input} keyboardType="numeric" placeholder='Enter your age' onChangeText={(val) => setAge(val)}></TextInput>
-      <Text>name: {name}, age: {age}</Text>
+      <ScrollView>
+      {people.map((item) => {
+        return (
+          <View key={item.key}>
+            <Text style={styles.item}>{item.name}</Text>
+          </View>
+        )
+      })}
+      </ScrollView>
     </View>
   );
 }
@@ -28,14 +35,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonContainer:{
-    marginTop: 20
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: 200,
+  item:{
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: 'pink',
+    fontSize: 24
   }
 });
