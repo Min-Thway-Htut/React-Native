@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, Text} from 'react-native';
 import LittleLemonHeader from './components/LittleLemonHeader';
 import Footer from './components/Footer';
+import MenuItems from './components/MenuItems'
 
 export default function Index(){
   return (
@@ -14,6 +15,7 @@ export default function Index(){
           lively but casual environment. We would love to hear
           more about your experience with us!
          </Text>
+         <MenuItems />
     </View>
     <View style={{backgroundColor: "yellow"}}>
       <Footer />
