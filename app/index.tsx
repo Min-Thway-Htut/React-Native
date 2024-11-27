@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 
 export default function Index(){
   return (
+    <>
     <View
     style={{flex:1, backgroundColor: '#495E57'}}>
          <LittleLemonHeader />
@@ -13,8 +14,10 @@ export default function Index(){
           lively but casual environment. We would love to hear
           more about your experience with us!
          </Text>
-         <Footer />
     </View>
-
+    <View style={{backgroundColor: "yellow"}}>
+      <Footer />
+    </View>
+    </>
   )
 }
