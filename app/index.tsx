@@ -1,95 +1,67 @@
-import React from "react";
-import { View, Text, StyleSheet, SectionList, SectionListData } from "react-native";
+import React from 'react';
+import {SectionList, Text, View, StyleSheet} from "react-native"
 
-type MenuItem = {
-  title: string;
-  data: string[];
+
+type User = {
+  id: number,
+  name: string,
+  data:  string[];
 };
 
-const menuItemsToDisplay: MenuItem[] = [
-  {
-    title: "Appetizers",
-    data: ["Hummus", "Moutabal", "Falafel", "Marinated Olives", "Kofta", "Eggplant Salad"],
-  },
-  {
-    title: "Sides",
-    data: ["Fries", "Buttered Rice", "Bread Sticks", "Pita Pocket", "Lentil Soup", "Greek Salad", "Rice Pilaf"],
-  },
-  {
-    title: "Desserts",
-    data: ["Baklava", "Tartufo", "Tiramisu", "Panna Cotta"],
-  },
-];
 
-type ItemProps = {
-  name: string;
-};
+const App: React.FC = () => {
 
-const Item: React.FC<ItemProps> = ({ name }) => (
-  <View style={menuStyles.innerContainer}>
-    <Text style={menuStyles.itemText}>{name}</Text>
-  </View>
-);
-
-const Separator: React.FC = () => <View style={menuStyles.separator} />;
-
-const Footer: React.FC = () => (
-  <Text style={menuStyles.footerText}>
-    All Rights Reserved by Little Lemon 2022
-  </Text>
-);
-
-const MenuItems: React.FC = () => {
-  const renderItem = ({ item }: { item: string }) => <Item name={item} />;
-
-  const renderSectionHeader = ({ section }: { section: SectionListData<string> }) => (
-    <Text style={menuStyles.sectionHeader}>{section.title}</Text>
-  );
-
+  const users: User[]=[
+    {
+      id: 1,
+      name: 'peter',
+      data: ['php','js','java']
+    },
+    {
+      id: 2,
+      name: 'Sam',
+      data: ['css','html','Bootstrap']
+    },
+    {
+      id: 3,
+      name: 'Bruce',
+      data: ['JS', 'React JS', 'React Native']
+    }
+  ]
   return (
-    <View style={menuStyles.container}>
+    <View style={styles.container}>
+      <Text style={styles.header}>Section List in React-Native</Text>
       <SectionList
+        sections={users}
         keyExtractor={(item, index) => item + index}
-        sections={menuItemsToDisplay}
-        renderItem={renderItem}
-        renderSectionHeader={renderSectionHeader}
-        ListFooterComponent={Footer}
-        ItemSeparatorComponent={Separator}
+        renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
+        renderSectionHeader={({ section: { name } }) => (
+          <Text style={styles.sectionHeader}>{name}</Text>
+        )}
       />
     </View>
   );
 };
 
-const menuStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 0.95,
+    flex: 1,
+    padding: 16,
   },
-  innerContainer: {
-    paddingHorizontal: 40,
-    paddingVertical: 20,
-    backgroundColor: "#333333",
+  header: {
+    fontSize: 31,
+    fontWeight: 'bold',
+    marginBottom: 16,
   },
   sectionHeader: {
-    backgroundColor: "#fbdabb",
-    color: "#333333",
-    fontSize: 34,
-    flexWrap: "wrap",
-    textAlign: "center",
+    color: 'red',
+    fontSize: 25,
+    marginVertical: 8,
   },
-  itemText: {
-    color: "#F4CE14",
-    fontSize: 32,
-  },
-  separator: {
-    borderBottomWidth: 1,
-    borderColor: "#EDEFEE",
-  },
-  footerText: {
-    color: "#EDEFEE",
-    fontSize: 20,
-    flexWrap: "wrap",
-    textAlign: "center",
+  item: {
+    fontSize: 18,
+    marginLeft: 16,
   },
 });
 
-export default MenuItems;
+export default App;
