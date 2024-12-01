@@ -1,54 +1,91 @@
-import React from 'react';
-import {useState } from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, TextInput } from 'react-native';
 
-const FeedbackForm = () => {
-
-  const [firstName, onChangeFirstName] = useState('First Name')
+const FeedbackForm: React.FC = () => {
+  // Declare the variables
+  const [firstName, onChangeFirstName] = useState<string>('');
+  const [lastName, onChangeLastName] = useState<string>('');
+  const [message, onChangeMessage] = useState<string>('');
+  const [phoneNumber, onChangePhoneNumber] = useState<string>('');
 
   return (
-    <ScrollView style={styles.container} >
-      <><Text style={styles.header}>Little Lemon</Text>
-      <Text style={styles.secondHeader}>Welcome to Little Lemon</Text>
-      <Text style={styles.paragraph}>Little Lemon is a charming neighborhood birstro that serves simple food and classic cocktails.</Text>
-      <TextInput style={styles.input} value={firstName} onChangeText={onChangeFirstName}/>
-      </>
+    <ScrollView style={styles.container}>
+      <Text style={styles.headingSection}>
+        How was your visit to Little Lemon?
+      </Text>
+      <Text style={styles.infoSection}>
+        Little Lemon is a charming neighborhood bistro that serves simple food
+        and classic cocktails in a lively but casual environment. We would love
+        to hear your experience with us!
+      </Text>
+      <TextInput
+        style={styles.input}
+        value={firstName}
+        onChangeText={onChangeFirstName}
+        placeholder="First Name"
+      />
+      <TextInput
+        style={styles.input}
+        value={lastName}
+        onChangeText={onChangeLastName}
+        placeholder="Last Name"
+      />
+      <TextInput
+        style={styles.input}
+        value={phoneNumber}
+        onChangeText={onChangePhoneNumber}
+        placeholder="Phone Number"
+        keyboardType="phone-pad"
+      />
+      <TextInput
+        style={styles.messageInput}
+        value={message}
+        onChangeText={onChangeMessage}
+        placeholder="Please leave feedback"
+        multiline
+        maxLength={250}
+      />
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container:{
-    backgroundColor: '#121212',
+  container: {
+    flex: 1,
   },
-  header:{
-    fontSize: 40,
-    textAlign: 'center',
-    backgroundColor: 'red',
-    paddingTop: 10,
-    paddingBottom: 10,
-    color: 'black'
-    },
-  secondHeader:{
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 20,
-    color: 'white',
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    fontSize: 16,
+    borderColor: '#EDEFEE',
+    backgroundColor: '#F4CE14',
   },
-  paragraph:{
-    color: 'yellow',
-    fontSize: 20,
-    textAlign: 'center',
+  messageInput: {
+    height: 100,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    fontSize: 16,
+    backgroundColor: '#F4CE14',
   },
-  input: { 
-        height: 40, 
-        margin: 12, 
-        borderWidth: 1, 
-        padding: 10, 
-        fontSize: 16, 
-        borderColor: 'EDEFEE', 
-        backgroundColor: '#F4CE14', 
-      }
-})
+  infoSection: {
+    fontSize: 24,
+    padding: 20,
+    marginVertical: 8,
+    color: '#EDEFEE',
+    textAlign: 'center',
+    backgroundColor: '#495E57',
+  },
+  headingSection: {
+    fontSize: 28,
+    padding: 20,
+    marginVertical: 8,
+    color: '#EDEFEE',
+    textAlign: 'center',
+    backgroundColor: '#495E57',
+  },
+});
 
 export default FeedbackForm;
