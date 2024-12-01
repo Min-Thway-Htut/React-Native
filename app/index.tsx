@@ -1,67 +1,54 @@
 import React from 'react';
-import {SectionList, Text, View, StyleSheet} from "react-native"
+import {useState } from "react";
+import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
 
+const FeedbackForm = () => {
 
-type User = {
-  id: number,
-  name: string,
-  data:  string[];
-};
+  const [firstName, onChangeFirstName] = useState('First Name')
 
-
-const App: React.FC = () => {
-
-  const users: User[]=[
-    {
-      id: 1,
-      name: 'peter',
-      data: ['php','js','java']
-    },
-    {
-      id: 2,
-      name: 'Sam',
-      data: ['css','html','Bootstrap']
-    },
-    {
-      id: 3,
-      name: 'Bruce',
-      data: ['JS', 'React JS', 'React Native']
-    }
-  ]
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Section List in React-Native</Text>
-      <SectionList
-        sections={users}
-        keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
-        renderSectionHeader={({ section: { name } }) => (
-          <Text style={styles.sectionHeader}>{name}</Text>
-        )}
-      />
-    </View>
-  );
-};
+    <ScrollView style={styles.container} >
+      <><Text style={styles.header}>Little Lemon</Text>
+      <Text style={styles.secondHeader}>Welcome to Little Lemon</Text>
+      <Text style={styles.paragraph}>Little Lemon is a charming neighborhood birstro that serves simple food and classic cocktails.</Text>
+      <TextInput style={styles.input} value={firstName} onChangeText={onChangeFirstName}/>
+      </>
+    </ScrollView>
+  )
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
+  container:{
+    backgroundColor: '#121212',
   },
-  header: {
-    fontSize: 31,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  sectionHeader: {
-    color: 'red',
+  header:{
+    fontSize: 40,
+    textAlign: 'center',
+    backgroundColor: 'red',
+    paddingTop: 10,
+    paddingBottom: 10,
+    color: 'black'
+    },
+  secondHeader:{
     fontSize: 25,
-    marginVertical: 8,
+    textAlign: 'center',
+    margin: 20,
+    color: 'white',
   },
-  item: {
-    fontSize: 18,
-    marginLeft: 16,
+  paragraph:{
+    color: 'yellow',
+    fontSize: 20,
+    textAlign: 'center',
   },
-});
+  input: { 
+        height: 40, 
+        margin: 12, 
+        borderWidth: 1, 
+        padding: 10, 
+        fontSize: 16, 
+        borderColor: 'EDEFEE', 
+        backgroundColor: '#F4CE14', 
+      }
+})
 
-export default App;
+export default FeedbackForm;
