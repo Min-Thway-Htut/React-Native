@@ -1,91 +1,90 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput } from 'react-native';
+import React, {useState} from "react";
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  TextInput,
+  Pressable,
+} from "react-native";
 
-const FeedbackForm: React.FC = () => {
-  // Declare the variables
-  const [firstName, onChangeFirstName] = useState<string>('');
-  const [lastName, onChangeLastName] = useState<string>('');
-  const [message, onChangeMessage] = useState<string>('');
-  const [phoneNumber, onChangePhoneNumber] = useState<string>('');
+export default function LoginScreen() {
+  const [email, onChangeEmail] = useState('');
+  const [password, onChangePassword] = useState('');
+  const [loggedIn, onLogin] = useState(false);
 
+ 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.headingSection}>
-        How was your visit to Little Lemon?
-      </Text>
-      <Text style={styles.infoSection}>
-        Little Lemon is a charming neighborhood bistro that serves simple food
-        and classic cocktails in a lively but casual environment. We would love
-        to hear your experience with us!
-      </Text>
-      <TextInput
-        style={styles.input}
-        value={firstName}
-        onChangeText={onChangeFirstName}
-        placeholder="First Name"
-      />
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={onChangeLastName}
-        placeholder="Last Name"
-      />
-      <TextInput
-        style={styles.input}
-        value={phoneNumber}
-        onChangeText={onChangePhoneNumber}
-        placeholder="Phone Number"
-        keyboardType="phone-pad"
-      />
-      <TextInput
-        style={styles.messageInput}
-        value={message}
-        onChangeText={onChangeMessage}
-        placeholder="Please leave feedback"
-        multiline
-        maxLength={250}
-      />
+      <Text style={styles.headerText}>Welcome to Little Lemon</Text>
+      {loggedIn && <Text style={styles.headerText}>You are logged in!</Text>}
+
+      {!loggedIn && (
+        <>
+          <Text style={styles.regularText}>Login to continue </Text>
+          <TextInput
+            style={styles.inputBox}
+            value={email}
+            onChangeText={onChangeEmail}
+            placeholder={'email'}
+            keyboardType={'email-address'}
+          />
+           <TextInput
+            style={styles.inputBox}
+            value={password}
+            onChangeText={onChangePassword}
+            placeholder={'password'}
+            keyboardType={'default'}
+            secureTextEntry={true}
+          />
+          <Pressable onPress={() => onLogin(!loggedIn)} style={styles.button}>
+            <Text style={styles.buttonText}>Log in</Text>
+          </Pressable>
+        </>
+      )}
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    fontSize: 16,
-    borderColor: '#EDEFEE',
-    backgroundColor: '#F4CE14',
+  headerText: {
+    padding: 40,
+    fontSize: 30,
+    color: '#EDEFEE',
+    textAlign: 'center',
   },
-  messageInput: {
-    height: 100,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    fontSize: 16,
-    backgroundColor: '#F4CE14',
-  },
-  infoSection: {
+  regularText: {
     fontSize: 24,
     padding: 20,
     marginVertical: 8,
     color: '#EDEFEE',
     textAlign: 'center',
-    backgroundColor: '#495E57',
   },
-  headingSection: {
-    fontSize: 28,
-    padding: 20,
+  inputBox: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    fontSize: 16,
+    borderColor: 'EDEFEE',
+    backgroundColor: '#EDEFEE',
+  },
+  button: {
+    fontSize: 22,
+    padding: 10,
     marginVertical: 8,
-    color: '#EDEFEE',
+    margin: 100,
+    backgroundColor: '#EE9972',
+    borderColor: '#EE9972',
+    borderWidth: 2,
+    borderRadius: 50,
+  },
+  buttonText: {
+    color: 'black',
     textAlign: 'center',
-    backgroundColor: '#495E57',
+    fontSize: 25,
   },
 });
 
-export default FeedbackForm;
