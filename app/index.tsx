@@ -4,6 +4,7 @@ import ImageComponent from "./components/ImageComponent";
 import UseColorScheme from "./components/UseColorScheme";
 import UseWindowDimensions from "./components/UseWindowDimensions";
 import WelcomeScreen from "./components/DarkAndWhiteTheme";
+import NavigationContainer from "./components/NavigationContainer";
 
 const Index = () => {
   return (
