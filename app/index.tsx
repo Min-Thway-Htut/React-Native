@@ -1,17 +1,28 @@
-import React from "react";
-import {View, ScrollView, Image, StyleSheet, Text} from "react-native";
-import ImageComponent from "./components/ImageComponent";
-import UseColorScheme from "./components/UseColorScheme";
-import UseWindowDimensions from "./components/UseWindowDimensions";
-import WelcomeScreen from "./components/DarkAndWhiteTheme";
-import NavigationContainer from "./components/NavigationContainer";
+import * as React from 'react';
+import { NavigationContainer as RNNavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MenuScreen from './components/screens/MenuScreen';
+import WelcomeScreen from './components/DarkAndWhiteTheme';
 
-const Index = () => {
+// Define the types for the stack navigator
+type RootStackParamList = {
+  Welcome: undefined;
+  Menu: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const NavigationContainer: React.FC = () => {
   return (
-    <View>
-      <WelcomeScreen />
-    </View>
-  )
-}
+    <RNNavigationContainer>
+      <Stack.Navigator initialRouteName="Welcome"
+        screenOptions={{headerStyle: {backgroundColor: '#FBDABB'}}}
+      >
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Menu" component={MenuScreen} />
+      </Stack.Navigator>
+    </RNNavigationContainer>
+  );
+};
 
-export default Index;
+export default NavigationContainer;
