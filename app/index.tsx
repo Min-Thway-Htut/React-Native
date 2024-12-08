@@ -1,28 +1,36 @@
-import * as React from 'react';
-import { NavigationContainer as RNNavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MenuScreen from './components/screens/MenuScreen';
-import WelcomeScreen from './components/DarkAndWhiteTheme';
+import * as React from "react";
+import { View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import MenuScreen from "./components/screens/MenuScreen";
+import WelcomeScreen from "./components/screens/WelcomeScreen";
+import { Ionicons } from '@expo/vector-icons';
 
-// Define the types for the stack navigator
-type RootStackParamList = {
-  Welcome: undefined;
-  Menu: undefined;
-};
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator();
 
-const NavigationContainer: React.FC = () => {
-  return (
-    <RNNavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome"
-        screenOptions={{headerStyle: {backgroundColor: '#FBDABB'}}}
-      >
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Menu" component={MenuScreen} />
-      </Stack.Navigator>
-    </RNNavigationContainer>
-  );
-};
+export default function App(){
+  return(
+       <Tab.Navigator
+       screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
 
-export default NavigationContainer;
+          if (route.name === 'Welcome'){
+            iconName = focused
+            ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+          }else if (route.name === 'Menu'){
+            iconName = 'ios-list';
+          }
+          return <Ionicons name={iconName} size={size} color={color}/>
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+       })}
+       >
+      <Tab.Screen name='Welcome' component={WelcomeScreen}></Tab.Screen>
+      <Tab.Screen name='Menu' component={MenuScreen}></Tab.Screen>
+    </Tab.Navigator>
+  )
+} 
